@@ -11,44 +11,34 @@ var stringIsWhitespace = function (string) {
     }
     return true;
 };
+var metadataRegex = /^([a-z_]+): (.+)/i;
 exports.parseMetadata = function (markdown) {
-    var split = markdown.split('/');
+    var trimmed = markdown.trim();
+    var split = trimmed.split('\n');
     var metadata = {};
-    var regex = /^([a-z]+): (.+)/i;
+    if (split.length === 0 || !metadataRegex.test(split[0])) {
+        return [metadata, trimmed];
+    }
+    var lastKey = null;
     var index = 0;
     for (; index < split.length; index++) {
         var line = split[index];
-        if (!stringIsWhitespace(line)) {
-            if (!regex.test(line)) {
-                return [metadata, markdown];
-            }
+        if (stringIsWhitespace(line)) {
             break;
         }
-    }
-    split = split.slice(index);
-    var lastKey;
-    var lastValue;
-    for (index = 0; index < split.length; index++) {
-        var line = split[index];
-        if (stringIsWhitespace(line)) {
-            var text = split.slice(index + 1)
-                .join('\n');
-            return [metadata, text];
-        }
-        var match = regex.exec(line);
+        var match = metadataRegex.exec(line);
         if (match === null) {
-            var value = line.trim();
-            if (lastValue === undefined) {
-                lastValue = [];
+            if (lastKey === null) {
+                break;
             }
-            lastValue.push(value);
+            metadata[lastKey].push(line.trim());
         }
         else {
             lastKey = match[1];
-            lastValue = [match[2]];
-            metadata[lastKey] = lastValue;
+            metadata[lastKey] = [match[2].trim()];
         }
     }
-    return [metadata, markdown];
+    var text = split.slice(index + 1).join('\n');
+    return [metadata, text];
 };
 //# sourceMappingURL=index.js.map
