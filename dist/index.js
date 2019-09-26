@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var stringIsWhitespace = function (string) {
+function stringIsWhitespace(string) {
     if (string.length === 0) {
         return true;
     }
@@ -10,9 +10,9 @@ var stringIsWhitespace = function (string) {
         }
     }
     return true;
-};
+}
 var metadataRegex = /^([a-z_]+): (.+)/i;
-exports.parseMetadata = function (markdown) {
+function parseMetadata(markdown) {
     var trimmed = markdown.trim();
     var split = trimmed.split('\n');
     var metadata = {};
@@ -40,5 +40,6 @@ exports.parseMetadata = function (markdown) {
     }
     var text = split.slice(index + 1).join('\n');
     return [metadata, text];
-};
+}
+exports.parseMetadata = parseMetadata;
 //# sourceMappingURL=index.js.map

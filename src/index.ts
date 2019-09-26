@@ -1,4 +1,4 @@
-const stringIsWhitespace = (string: string) => {
+function stringIsWhitespace(string: string) {
     if (string.length === 0) {
         return true
     }
@@ -17,7 +17,7 @@ export type Metadata = { [ key: string ]: string[] }
 const metadataRegex = /^([a-z_]+): (.+)/i
 
 
-export const parseMetadata = (markdown: string): [ Metadata, string ] => {
+export function parseMetadata(markdown: string): [ Metadata, string ] {
     const trimmed = markdown.trim()
     const split = trimmed.split('\n')
     const metadata: Metadata = {}

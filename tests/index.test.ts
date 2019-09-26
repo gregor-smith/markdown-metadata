@@ -1,46 +1,18 @@
-import fs from 'fs'
+import { promises as fs } from 'fs'
 import path from 'path'
 
 import { parseMetadata } from '../src'
 
 
-const readExample = (filename: string) => {
+async function exampleMatchesSnap(filename: string) {
     const filePath = path.join(__dirname, 'examples', filename)
-    return new Promise<string>((resolve, reject) =>
-        fs.readFile(filePath, { encoding: 'utf8' }, (error, data) => {
-            if (error !== null) {
-                reject(error)
-                return
-            }
-            resolve(data)
-        })
-    )
+    const example = await fs.readFile(filePath, { encoding: 'utf8' })
+    const output = parseMetadata(example)
+    expect(output).toMatchSnapshot()
 }
 
 
-test('Single line metadata', async () => {
-    const example = await readExample('single-line.md')
-    const output = parseMetadata(example)
-    expect(output).toMatchSnapshot()
-})
-
-
-test('Multi line metadata', async () => {
-    const example = await readExample('multi-line.md')
-    const output = parseMetadata(example)
-    expect(output).toMatchSnapshot()
-})
-
-
-test('Whitespace before metadata', async () => {
-    const example = await readExample('whitespace.md')
-    const output = parseMetadata(example)
-    expect(output).toMatchSnapshot()
-})
-
-
-test('No metadata', async () => {
-    const example = await readExample('no-metadata.md')
-    const output = parseMetadata(example)
-    expect(output).toMatchSnapshot()
-})
+test('Single line metadata', () => exampleMatchesSnap('single-line.md'))
+test('Multi line metadata', () => exampleMatchesSnap('multi-line.md'))
+test('Whitespace before metadata', () => exampleMatchesSnap('whitespace.md'))
+test('No metadata', () => exampleMatchesSnap('no-metadata.md'))
