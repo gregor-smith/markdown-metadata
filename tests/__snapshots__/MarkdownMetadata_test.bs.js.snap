@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Multi line CRLF metadata 1`] = `
+Array [
+  Object {
+    "date": Array [
+      "2019-01-02 12:00",
+    ],
+    "tags": Array [
+      "Programming",
+      "Testing",
+    ],
+    "title": Array [
+      "Test title 2",
+    ],
+  },
+  "Dolor sed viverra ipsum nunc aliquet bibendum enim.
+In massa tempor nec feugiat.
+Nunc aliquet bibendum enim
+facilisis gravida.",
+]
+`;
+
 exports[`Multi line metadata 1`] = `
 Array [
   Object {

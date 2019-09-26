@@ -14,7 +14,7 @@ function stringIsWhitespace(string) {
 var metadataRegex = /^([a-z_]+): (.+)/i;
 function parseMetadata(markdown) {
     var trimmed = markdown.trim();
-    var split = trimmed.split('\n');
+    var split = trimmed.split(/\r?\n/);
     var metadata = {};
     if (split.length === 0 || !metadataRegex.test(split[0])) {
         return [metadata, trimmed];

@@ -14,5 +14,6 @@ async function exampleMatchesSnap(filename: string) {
 
 test('Single line metadata', () => exampleMatchesSnap('single-line.md'))
 test('Multi line metadata', () => exampleMatchesSnap('multi-line.md'))
+test('Multi line CRLF metadata', () => exampleMatchesSnap('multi-line-crlf.md'))
 test('Whitespace before metadata', () => exampleMatchesSnap('whitespace.md'))
 test('No metadata', () => exampleMatchesSnap('no-metadata.md'))

@@ -27,6 +27,10 @@ Jest.testPromise("Multi line metadata", undefined, (function (param) {
         return exampleMatchesSnap("multi-line.md");
       }));
 
+Jest.testPromise("Multi line CRLF metadata", undefined, (function (param) {
+        return exampleMatchesSnap("multi-line-crlf.md");
+      }));
+
 Jest.testPromise("Whitespace before metadata", undefined, (function (param) {
         return exampleMatchesSnap("whitespace.md");
       }));

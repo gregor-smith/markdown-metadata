@@ -19,7 +19,7 @@ const metadataRegex = /^([a-z_]+): (.+)/i
 
 export function parseMetadata(markdown: string): [ Metadata, string ] {
     const trimmed = markdown.trim()
-    const split = trimmed.split('\n')
+    const split = trimmed.split(/\r?\n/)
     const metadata: Metadata = {}
 
     if (split.length === 0 || !metadataRegex.test(split[0])) {

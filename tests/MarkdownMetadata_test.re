@@ -24,5 +24,6 @@ let exampleMatchesSnap = filename => {
 
 testPromise("Single line metadata", () => exampleMatchesSnap("single-line.md"));
 testPromise("Multi line metadata", () => exampleMatchesSnap("multi-line.md"));
+testPromise("Multi line CRLF metadata", () => exampleMatchesSnap("multi-line-crlf.md"));
 testPromise("Whitespace before metadata", () => exampleMatchesSnap("whitespace.md"));
 testPromise("No metadata", () => exampleMatchesSnap("no-metadata.md"));
