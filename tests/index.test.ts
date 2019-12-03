@@ -1,12 +1,12 @@
-import { promises as fs } from 'fs'
-import path from 'path'
+import * as fs from 'fs'
+import * as path from 'path'
 
 import { parseMetadata } from '../src'
 
 
-async function exampleMatchesSnap(filename: string) {
+function exampleMatchesSnap(filename: string) {
     const filePath = path.join(__dirname, 'examples', filename)
-    const example = await fs.readFile(filePath, { encoding: 'utf8' })
+    const example = fs.readFileSync(filePath, { encoding: 'utf8' })
     const output = parseMetadata(example)
     expect(output).toMatchSnapshot()
 }

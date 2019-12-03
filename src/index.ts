@@ -1,20 +1,7 @@
-function stringIsWhitespace(string: string) {
-    if (string.length === 0) {
-        return true
-    }
-    for (let index = 0; index < string.length; index++) {
-        if (string.charAt(index) !== ' ') {
-            return false
-        }
-    }
-    return true
-}
-
-
 export type Metadata = { [ key: string ]: string[] }
 
 
-const metadataRegex = /^([a-z_]+): (.+)/i
+export const metadataRegex = /^([a-z_]+): (.+)/i
 
 
 export function parseMetadata(markdown: string): [ Metadata, string ] {
@@ -30,7 +17,7 @@ export function parseMetadata(markdown: string): [ Metadata, string ] {
     let index = 0
     for (; index < split.length; index++) {
         const line = split[index]
-        if (stringIsWhitespace(line)) {
+        if (/^\s*$/.test(line)) {
             break
         }
         const match = metadataRegex.exec(line)
